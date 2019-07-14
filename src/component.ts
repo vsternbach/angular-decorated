@@ -108,6 +108,7 @@ export function extendWithHostListenersAndChildren(ctrl: {new(...args: any[])},
       });
     }
     $postLink() {
+      this._updateViewChildren();
       if (super.$postLink) {
         super.$postLink();
       }
@@ -115,13 +116,12 @@ export function extendWithHostListenersAndChildren(ctrl: {new(...args: any[])},
         const { eventName } = listeners[handler];
         this.$element.on(eventName + namespace, this[handler].bind(this));
       });
-      this._updateViewChildren();
     }
     $onChanges(changes) {
+      this._updateViewChildren();
       if (super.$onChanges) {
         super.$onChanges(changes);
       }
-      this._updateViewChildren();
     }
     $onDestroy() {
       if (super.$onDestroy) {
