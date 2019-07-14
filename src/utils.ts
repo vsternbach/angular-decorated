@@ -33,6 +33,11 @@ export function isAttributeSelector(selector: string) {
 
 /** @internal */
 export function getMetadata(metadataKey: any, target: any): any {
+  let metadata = Reflect.getMetadata(metadataKey, target);
+
+  if (metadata !== null && typeof metadata === 'object')
+    metadata = {...metadata};
+
   return Reflect.getMetadata(metadataKey, target);
 }
 
